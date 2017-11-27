@@ -1,6 +1,7 @@
 package com.guilhermecardoso.buscapontos.domain.network;
 
 import com.guilhermecardoso.buscapontos.domain.network.interceptor.AuthenticationInterceptor;
+import com.guilhermecardoso.buscapontos.domain.network.interceptor.LoggingInterceptor;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -35,6 +36,8 @@ public class ServiceFactory {
                 httpClient.addInterceptor(interceptor);
             }
         }
+
+        httpClient.addInterceptor(new LoggingInterceptor());
 
         builder.client(httpClient.build());
         builder.addCallAdapterFactory(RxJava2CallAdapterFactory.create());
